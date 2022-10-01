@@ -10,10 +10,12 @@ public class Player: MonoBehaviour
     public float gravity = -9.81f * 2;
 
     public Transform shootOrigin;
-    private float moveSpeed = 5f;
-    private float jumpSpeed = 5f;
+    public float moveSpeed = 5f;
+    public float jumpSpeed = 5f;
     public float health;
-    private float maxHealth = 100f;
+    public float maxHealth = 100f;
+    public int itemAmount = 0;
+    public int maxItemAmount = 3;
 
     private bool[] inputs;
     private float yVelocity = 0;
@@ -114,5 +116,15 @@ public class Player: MonoBehaviour
         controller.enabled = true;
 
         ServerSend.PlayerRespawned(this);
+    }
+
+    public bool AttemptPickupItem()
+    {
+        if(itemAmount >= maxItemAmount)
+        {
+            return false;
+        }
+        itemAmount++;
+        return true;
     }
 }
